@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEXLA UF - Hem</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">VEXLA UF</div>
+  <a href="cart.html" class="cart-icon">
+    🛒<span id="cartCount">0</span>
+  </a>
+</header>
+
+<main>
+  <div class="product-card" onclick="location.href='product.html'">
+    <img src="https://via.placeholder.com/300x200.png?text=%C3%96vningsk%C3%B6rningsskylt" alt="Övningskörningsskylt">
+    <h2>Övningskörningsskylt</h2>
+    <p>Klicka för mer information</p>
+  </div>
+</main>
+
+<script>
+  // Uppdatera varukorgsantal på sidan
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+</script>
+</body>
+</html>

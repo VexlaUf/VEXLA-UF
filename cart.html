@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEXLA UF - Varukorg</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">VEXLA UF</div>
+  <a href="cart.html" class="cart-icon">🛒</a>
+</header>
+
+<main>
+  <h1>Din Varukorg</h1>
+  <div id="cartItems"></div>
+  <p id="total"></p>
+  <h2>Betalningsmetoder</h2>
+  <button onclick="pay('Swish')">Swish</button>
+  <button onclick="pay('Kort')">Kort</button>
+  <button onclick="pay('PayPal')">PayPal</button>
+</main>
+
+<script>
+  function loadCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartItems = document.getElementById('cartItems');
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    cart.forEach(item => {
+      total += item.price * item.qty;
+      cartItems.innerHTML += `<div>${item.name} x ${item.qty} - ${item.price * item.qty} kr</div>`;
+    });
+
+    document.getElementById('total').innerText = 'Totalt: ' + total + ' kr';
+  }
+
+  function pay(method) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) { alert("Varukorgen är tom!"); return; }
+    alert(`Du valde att betala med ${method}. Tack för ditt köp!`);
+    localStorage.removeItem('cart');
+    loadCart();
+  }
+
+  loadCart();
+</script>
+</body>
+</html>

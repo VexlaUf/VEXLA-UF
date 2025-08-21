@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEXLA UF - Övningskörningsskylt</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">VEXLA UF</div>
+  <a href="cart.html" class="cart-icon">
+    🛒<span id="cartCount">0</span>
+  </a>
+</header>
+
+<main>
+  <div class="product-page">
+    <img src="https://via.placeholder.com/400x300.png?text=%C3%96vningsk%C3%B6rningsskylt" alt="Övningskörningsskylt">
+    <div class="product-info">
+      <h1>Övningskörningsskylt</h1>
+      <p>Vi på VEXLA UF har utvecklat ett smart sätt att montera din övningskörningsskylt. Byt enkelt ut reklamlisten under registreringsskylten mot vår specialdesignade övningskörningsskylt. Enkelt, smidigt och säkert!</p>
+      <p><strong>Pris: 299 kr</strong></p>
+      <label>Antal:</label>
+      <input type="number" id="qty" value="1" min="1">
+      <button onclick="addToCart()">Lägg till i varukorg</button>
+    </div>
+  </div>
+</main>
+
+<script>
+  function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+  }
+
+  function addToCart() {
+    let qty = parseInt(document.getElementById('qty').value);
+    if (qty < 1) qty = 1;
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let existing = cart.find(item => item.name === "Övningskörningsskylt");
+    if (existing) existing.qty += qty;
+    else cart.push({name: "Övningskörningsskylt", price: 299, qty});
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    alert("Produkten har lagts till i varukorgen!");
+  }
+
+  updateCartCount();
+</script>
+</body>
+</html>
